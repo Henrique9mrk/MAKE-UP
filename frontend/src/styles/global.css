@@ -1,0 +1,653 @@
+@import "./variables.css";
+@import "./navbar.css";
+@import "./home.css";
+@import "./products.css";
+@import "./footer.css";
+@import "./checkout.css";
+
+
+/* =========================================
+   RESET
+   ========================================= */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+/* =========================================
+   HTML E BODY
+   ========================================= */
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Inter, "Segoe UI", Roboto, sans-serif;
+    background: var(--color-background);
+    color: var(--color-text);
+    line-height: 1.6;
+}
+
+
+/* =========================================
+   ELEMENTOS GERAIS
+   ========================================= */
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button,
+input,
+textarea {
+    font: inherit;
+}
+
+img {
+    display: block;
+    width: 100%;
+}
+
+
+/* =========================================
+   ESTRUTURA PRINCIPAL
+   ========================================= */
+
+#root {
+    min-height: 100vh;
+}
+
+.app-shell {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.main-content {
+    flex: 1;
+}
+
+
+/* =========================================
+   CONTAINER
+   ========================================= */
+
+.container {
+    width: min(
+        var(--container-width),
+        calc(100% - 2rem)
+    );
+
+    margin: 0 auto;
+}
+
+
+/* =========================================
+   SEÇÕES
+   ========================================= */
+
+.page-section {
+    padding: 3.5rem 0;
+}
+
+
+/* =========================================
+   CABEÇALHO DAS SEÇÕES
+   ========================================= */
+
+.section-header {
+    max-width: 45rem;
+    margin-bottom: 2rem;
+}
+
+.section-eyebrow {
+    color: var(--color-primary);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+}
+
+.section-description {
+    color: var(--color-muted);
+}
+
+
+/* =========================================
+   BOTÕES
+   ========================================= */
+
+.button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+
+    padding: 0.8rem 1.15rem;
+
+    border-radius: 999px;
+    border: none;
+
+    cursor: pointer;
+
+    font-weight: 700;
+
+    transition:
+        transform 180ms ease,
+        box-shadow 180ms ease;
+}
+
+.button:hover {
+    transform: translateY(-1px);
+}
+
+.button--primary {
+    background: var(--color-primary);
+    color: #fff;
+
+    box-shadow:
+        0 10px 20px rgba(178, 58, 91, 0.2);
+}
+
+.button--primary:hover {
+    background: var(--color-primary-dark);
+}
+
+.button--secondary {
+    background: #fff;
+    color: var(--color-primary);
+
+    border: 1px solid var(--color-primary);
+}
+
+.button--secondary:hover {
+    background: var(--color-primary);
+    color: #fff;
+}
+
+
+/* =========================================
+   GRID DE CARDS
+   ========================================= */
+
+.card-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(240px, 1fr)
+        );
+
+    gap: 1.25rem;
+}
+
+
+/* =========================================
+   CARDS
+   ========================================= */
+
+.info-card,
+.form-card,
+.product-card,
+.product-detail {
+    background: var(--color-surface);
+
+    border: 1px solid var(--color-border);
+
+    border-radius: var(--radius-lg);
+
+    box-shadow: var(--shadow-soft);
+}
+
+.info-card,
+.form-card {
+    padding: 1.5rem;
+}
+
+
+/* =========================================
+   FORMULÁRIOS
+   ========================================= */
+
+.form-card {
+    display: grid;
+    gap: 1rem;
+
+    max-width: 40rem;
+}
+
+.form-card label {
+    display: grid;
+    gap: 0.4rem;
+
+    font-weight: 600;
+}
+
+.form-card input,
+.form-card textarea {
+    width: 100%;
+
+    border: 1px solid var(--color-border);
+
+    border-radius: var(--radius-md);
+
+    padding: 0.8rem 1rem;
+
+    background: #fff;
+
+    color: var(--color-text);
+
+    outline: none;
+}
+
+.form-card input:focus,
+.form-card textarea:focus {
+    border-color: var(--color-primary);
+
+    box-shadow:
+        0 0 0 3px rgba(178, 58, 91, 0.1);
+}
+
+
+/* =========================================
+   LINKS
+   ========================================= */
+
+.text-link {
+    color: var(--color-primary);
+    font-weight: 700;
+}
+
+.text-link:hover {
+    color: var(--color-primary-dark);
+}
+
+
+/* =========================================
+   PERFIL
+   ========================================= */
+
+.profile-card {
+    max-width: 40rem;
+
+    display: grid;
+    gap: 1.5rem;
+
+    padding: 1.5rem;
+
+    background: var(--color-surface);
+
+    border: 1px solid var(--color-border);
+
+    border-radius: var(--radius-lg);
+
+    box-shadow: var(--shadow-soft);
+}
+
+
+/* =========================================
+   CABEÇALHO DO PERFIL
+   ========================================= */
+
+.profile-card__header {
+    display: flex;
+
+    align-items: center;
+
+    gap: 1rem;
+}
+
+
+/* =========================================
+   AVATAR
+   ========================================= */
+
+.profile-avatar {
+    width: 56px;
+    height: 56px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: var(--color-primary);
+
+    color: #ffffff;
+
+    font-size: 1.4rem;
+
+    font-weight: 800;
+
+    line-height: 1;
+}
+
+
+/* =========================================
+   NOME E E-MAIL DO PERFIL
+   ========================================= */
+
+.profile-card__header h2 {
+    margin: 0;
+
+    color: var(--color-text);
+
+    font-size: 1.5rem;
+}
+
+.profile-card__header p {
+    margin: 0.2rem 0 0;
+
+    color: var(--color-muted);
+}
+
+
+/* =========================================
+   INFORMAÇÕES DO PERFIL
+   ========================================= */
+
+.profile-card__content {
+    display: grid;
+
+    gap: 1rem;
+}
+
+.profile-info {
+    display: grid;
+
+    gap: 0.25rem;
+}
+
+.profile-info span {
+    color: var(--color-muted);
+
+    font-size: 0.85rem;
+
+    font-weight: 600;
+}
+
+.profile-info strong {
+    color: var(--color-text);
+
+    font-size: 1rem;
+}
+
+
+/* =========================================
+   AÇÕES DO PERFIL
+   ========================================= */
+
+.profile-card__actions {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 0.75rem;
+
+    padding-top: 0.5rem;
+}
+
+
+/* =========================================
+   RESPONSIVIDADE
+   ========================================= */
+
+@media (max-width: 760px) {
+    .page-section {
+        padding: 2.5rem 0;
+    }
+}
+
+/* =========================================
+   MEUS PEDIDOS
+   ========================================= */
+
+.profile-orders {
+    margin-top: 2rem;
+    display: grid;
+    gap: 1.5rem;
+}
+
+.profile-orders__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.profile-orders__header h2 {
+    margin: 0.25rem 0 0.5rem;
+    color: var(--color-text);
+    font-size: 1.5rem;
+}
+
+.profile-orders__header p:last-child {
+    color: var(--color-muted);
+}
+
+/* =========================================
+   MENSAGENS DOS PEDIDOS
+   ========================================= */
+
+.profile-orders__message {
+    display: grid;
+    gap: 1rem;
+    padding: 1.5rem;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-soft);
+}
+
+.profile-orders__message p {
+    color: var(--color-muted);
+}
+
+.profile-orders__message--error {
+    border-color: #e5a4a4;
+}
+
+/* =========================================
+   LISTA DE PEDIDOS
+   ========================================= */
+
+.profile-orders__list {
+    display: grid;
+    gap: 1.25rem;
+}
+
+/* =========================================
+   CARD DO PEDIDO
+   ========================================= */
+
+.profile-order {
+    display: grid;
+    gap: 1.25rem;
+    padding: 1.5rem;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-soft);
+}
+
+/* =========================================
+   CABEÇALHO DO PEDIDO
+   ========================================= */
+
+.profile-order__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.profile-order__header div {
+    display: grid;
+    gap: 0.2rem;
+}
+
+.profile-order__header span {
+    color: var(--color-muted);
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.profile-order__header strong {
+    color: var(--color-text);
+}
+
+/* =========================================
+   ITENS DO PEDIDO
+   ========================================= */
+
+.profile-order__items {
+    display: grid;
+    gap: 1rem;
+}
+
+.profile-order__item {
+    display: grid;
+    grid-template-columns: 72px minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.75rem 0;
+}
+
+.profile-order__item + .profile-order__item {
+    border-top: 1px solid var(--color-border);
+}
+
+.profile-order__item img {
+    width: 72px;
+    height: 72px;
+    object-fit: cover;
+    border-radius: var(--radius-md);
+}
+
+.profile-order__item div {
+    min-width: 0;
+}
+
+.profile-order__item span {
+    display: block;
+    margin-bottom: 0.2rem;
+    color: var(--color-primary);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.profile-order__item h3 {
+    margin: 0;
+    color: var(--color-text);
+    font-size: 1rem;
+}
+
+.profile-order__item p {
+    margin-top: 0.25rem;
+    color: var(--color-muted);
+    font-size: 0.9rem;
+}
+
+.profile-order__item > strong {
+    color: var(--color-text);
+    white-space: nowrap;
+}
+
+/* =========================================
+   TOTAL DO PEDIDO
+   ========================================= */
+
+.profile-order__total {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--color-border);
+}
+
+.profile-order__total span {
+    color: var(--color-muted);
+    font-weight: 600;
+}
+
+.profile-order__total strong {
+    color: var(--color-primary);
+    font-size: 1.2rem;
+}
+
+/* =========================================
+   RESPONSIVIDADE DOS PEDIDOS
+   ========================================= */
+
+@media (max-width: 600px) {
+
+    .profile-orders {
+        margin-top: 1.5rem;
+    }
+
+    .profile-order {
+        padding: 1.25rem;
+    }
+
+    .profile-order__header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .profile-order__item {
+        grid-template-columns: 60px minmax(0, 1fr);
+    }
+
+    .profile-order__item img {
+        width: 60px;
+        height: 60px;
+    }
+
+    .profile-order__item > strong {
+        grid-column: 2;
+    }
+
+    .profile-order__total {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}
+
+/* =========================================
+   PERFIL NO CELULAR
+   ========================================= */
+
+@media (max-width: 600px) {
+
+    .profile-card {
+        padding: 1.25rem;
+    }
+
+    .profile-card__header {
+        align-items: flex-start;
+    }
+
+    .profile-card__actions {
+        flex-direction: column;
+    }
+
+    .profile-card__actions .button {
+        width: 100%;
+    }
+}

@@ -1,0 +1,187 @@
+/* =========================================
+   CHECKOUT
+   ========================================= */
+
+.checkout-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.5fr) minmax(280px, 0.8fr);
+    gap: 2rem;
+    align-items: start;
+}
+
+
+/* =========================================
+   FORMULÁRIO
+   ========================================= */
+
+.checkout-layout .form-card {
+    width: 100%;
+    max-width: none;
+}
+
+.checkout-layout .form-card label {
+    color: var(--color-text);
+}
+
+.checkout-layout .form-card input,
+.checkout-layout .form-card textarea,
+.checkout-layout .form-card select {
+    width: 100%;
+
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+
+    padding: 0.85rem 1rem;
+
+    background: #fff;
+    color: var(--color-text);
+
+    outline: none;
+
+    transition:
+        border-color 180ms ease,
+        box-shadow 180ms ease;
+}
+
+.checkout-layout .form-card input:focus,
+.checkout-layout .form-card textarea:focus,
+.checkout-layout .form-card select:focus {
+    border-color: var(--color-primary);
+
+    box-shadow:
+        0 0 0 3px rgba(178, 58, 91, 0.1);
+}
+
+.checkout-layout .form-card textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+
+/* =========================================
+   RESUMO DO PEDIDO
+   ========================================= */
+
+.checkout-layout .cart-summary {
+    position: sticky;
+    top: 100px;
+
+    display: grid;
+    gap: 1rem;
+
+    padding: 1.5rem;
+
+    background: var(--color-surface);
+
+    border: 1px solid var(--color-border);
+
+    border-radius: var(--radius-lg);
+
+    box-shadow: var(--shadow-soft);
+}
+
+.checkout-layout .cart-summary h2 {
+    color: var(--color-text);
+    font-size: 1.25rem;
+}
+
+
+/* =========================================
+   LINHAS DO RESUMO
+   ========================================= */
+
+.checkout-layout .cart-summary__line {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 1rem;
+
+    padding-bottom: 0.75rem;
+
+    color: var(--color-muted);
+}
+
+.checkout-layout .cart-summary__line strong {
+    color: var(--color-text);
+    white-space: nowrap;
+}
+
+
+/* =========================================
+   TOTAL
+   ========================================= */
+
+.checkout-layout .cart-summary__total {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 1rem;
+
+    font-size: 1.1rem;
+}
+
+.checkout-layout .cart-summary__total strong {
+    color: var(--color-primary);
+    font-size: 1.25rem;
+}
+
+
+/* =========================================
+   LINHA DIVISÓRIA
+   ========================================= */
+
+.checkout-layout .cart-summary hr {
+    width: 100%;
+
+    border: none;
+    border-top: 1px solid var(--color-border);
+}
+
+
+/* =========================================
+   BOTÃO
+   ========================================= */
+
+.checkout-layout .form-card .button {
+    width: 100%;
+    margin-top: 0.5rem;
+}
+
+
+/* =========================================
+   RESPONSIVIDADE
+   ========================================= */
+
+@media (max-width: 850px) {
+    .checkout-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .checkout-layout .cart-summary {
+        position: static;
+    }
+}
+
+
+/* =========================================
+   CELULAR
+   ========================================= */
+
+@media (max-width: 600px) {
+    .checkout-layout {
+        gap: 1.25rem;
+    }
+
+    .checkout-layout .form-card,
+    .checkout-layout .cart-summary {
+        padding: 1.25rem;
+    }
+
+    .checkout-layout .cart-summary__line {
+        align-items: flex-start;
+    }
+}

@@ -1,0 +1,125 @@
+
+.categorias-page {
+  width: min(1120px, calc(100% - 40px));
+  min-height: 60vh;
+  margin: 0 auto;
+  padding: 48px 0 64px;
+  color: var(--color-text, #302632);
+}
+
+.categorias-header {
+  margin-bottom: 32px;
+  text-align: center;
+}
+
+.categorias-eyebrow {
+  margin-bottom: 10px;
+  color: #bd365c;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.categorias-header h1 {
+  margin: 0 0 12px;
+  font-size: clamp(2rem, 4vw, 2.8rem);
+}
+
+.categorias-header > p:last-child {
+  margin: 0;
+  color: #716671;
+  line-height: 1.7;
+}
+
+.categorias-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.categoria-card {
+  display: flex;
+  min-height: 190px;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 26px;
+  border: 1px solid #f0dce3;
+  border-radius: 16px;
+  background: linear-gradient(145deg, #fff, #fff5f8);
+  box-shadow: 0 5px 18px rgb(80 40 60 / 5%);
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    border-color 180ms ease;
+}
+
+.categoria-card:hover {
+  transform: translateY(-4px);
+  border-color: #e7b3c5;
+  box-shadow: 0 12px 28px rgb(80 40 60 / 10%);
+}
+
+.categoria-card h2 {
+  margin: 0;
+  font-size: 1.45rem;
+}
+
+.categoria-card a,
+.categorias-vazias a {
+  color: #b72f57;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.categoria-card a:hover,
+.categorias-vazias a:hover {
+  text-decoration: underline;
+}
+
+.categoria-card a:focus-visible,
+.categorias-vazias a:focus-visible {
+  outline: 2px solid #b72f57;
+  outline-offset: 4px;
+}
+
+.categorias-vazias {
+  padding: 32px;
+  border: 1px solid #f0dce3;
+  border-radius: 16px;
+  background: #fff8fa;
+  text-align: center;
+}
+
+@media (max-width: 850px) {
+  .categorias-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .categorias-page {
+    width: calc(100% - 28px);
+    padding: 32px 0 44px;
+  }
+
+  .categorias-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .categoria-card {
+    min-height: 145px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .categoria-card {
+    transition: none;
+  }
+
+  .categoria-card:hover {
+    transform: none;
+  }
+}

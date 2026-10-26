@@ -1,0 +1,17 @@
+.hero {
+  background: linear-gradient(135deg, #fff3f4 0%, #ffffff 100%);
+  border: 1px solid var(--color-border);
+  border-radius: 1.5rem;
+  padding: 2.5rem;
+  margin-bottom: 2rem;
+  box-shadow: var(--shadow-soft);
+}
+
+.hero__content {
+  max-width: 40rem;
+}
+
+.hero h2 {
+  font-size: clamp(1.6rem, 2.3vw, 2.3rem);
+  margin-bottom: 0.75rem;
+}
