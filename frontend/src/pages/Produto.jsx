@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import PageSection from "../components/PageSection";
 import { formatCurrency } from "../utils/formatCurrency";
-import { useCart } from "../context/CartContext";
+import { useCart } from "../context/useCart";
 
 function Produto() {
   const { id } = useParams();

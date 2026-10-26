@@ -1,7 +1,7 @@
 import PageSection from "../components/PageSection";
 import ProductCard from "../components/ProductCard";
 
-import { useFavorites } from "../context/FavoritesContext";
+import { useFavorites } from "../context/useFavorites";
 
 function Favoritos() {
   const { favoriteItems } = useFavorites();

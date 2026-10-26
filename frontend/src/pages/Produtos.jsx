@@ -12,9 +12,6 @@ function Produtos() {
 
   const [products, setProducts] = useState([]);
   const [search, setSearch] = useState("");
-  const [category, setCategory] = useState(
-    searchParams.get("categoria") || "Todos"
-  );
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
@@ -80,31 +77,33 @@ function Produtos() {
     return ["Todos", ...categoriasUnicas];
   }, [products]);
 
-  // Mantém o filtro sincronizado com a URL.
+  // A URL é a fonte principal da categoria selecionada.
+  const categoriaDaUrl = searchParams.get("categoria") || "Todos";
+
+  const category = categories.includes(categoriaDaUrl)
+    ? categoriaDaUrl
+    : "Todos";
+
+  // Remove da URL uma categoria que não existe no catálogo.
   useEffect(() => {
-    const categoriaDaUrl = searchParams.get("categoria") || "Todos";
-
-    const categoriaValida = categories.includes(categoriaDaUrl)
-      ? categoriaDaUrl
-      : "Todos";
-
-    setCategory(categoriaValida);
-
-    // Corrige uma categoria inválida ou inexistente na URL.
-    if (categoriaDaUrl !== categoriaValida) {
-      setSearchParams(
-        categoriaValida === "Todos"
-          ? {}
-          : { categoria: categoriaValida },
-        { replace: true }
-      );
+    if (
+      !loading &&
+      !error &&
+      categoriaDaUrl !== "Todos" &&
+      !categories.includes(categoriaDaUrl)
+    ) {
+      setSearchParams({}, { replace: true });
     }
-  }, [searchParams, categories, setSearchParams]);
+  }, [
+    categoriaDaUrl,
+    categories,
+    loading,
+    error,
+    setSearchParams,
+  ]);
 
   // Atualiza o filtro e o endereço da página.
   function selecionarCategoria(novaCategoria) {
-    setCategory(novaCategoria);
-
     setSearchParams(
       novaCategoria === "Todos"
         ? {}

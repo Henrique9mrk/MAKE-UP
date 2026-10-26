@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 
 import PageSection from "../components/PageSection";
-import { useCart } from "../context/CartContext";
+import { useCart } from "../context/useCart";
 import { formatCurrency } from "../utils/formatCurrency";
 
 function Checkout() {

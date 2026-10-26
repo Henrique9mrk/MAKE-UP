@@ -8,37 +8,42 @@ import { formatCurrency } from "../utils/formatCurrency";
 function Perfil() {
   const navigate = useNavigate();
 
-  const [usuario, setUsuario] = useState(null);
-  const [pedidos, setPedidos] = useState([]);
-  const [carregandoPedidos, setCarregandoPedidos] = useState(true);
-  const [erroPedidos, setErroPedidos] = useState("");
-
-  useEffect(() => {
+  const [usuario] = useState(() => {
     const usuarioSalvo = localStorage.getItem("makeup-user");
     const token = localStorage.getItem("makeup-token");
 
     if (!usuarioSalvo || !token) {
-      navigate("/login");
-      return;
+      return null;
     }
 
     try {
-      const dadosUsuario = JSON.parse(usuarioSalvo);
-      setUsuario(dadosUsuario);
+      return JSON.parse(usuarioSalvo);
     } catch (error) {
       console.error("Erro ao carregar usuário:", error);
 
       localStorage.removeItem("makeup-user");
       localStorage.removeItem("makeup-token");
 
-      navigate("/login");
+      return null;
     }
-  }, [navigate]);
+  });
+
+  const [pedidos, setPedidos] = useState([]);
+  const [carregandoPedidos, setCarregandoPedidos] = useState(true);
+  const [erroPedidos, setErroPedidos] = useState("");
 
   useEffect(() => {
     if (!usuario) {
-      return;
+      navigate("/login", { replace: true });
     }
+  }, [usuario, navigate]);
+
+  useEffect(() => {
+  if (!usuario) {
+    return;
+  }
+
+  let ativo = true;
 
     async function carregarPedidos() {
       try {
@@ -48,7 +53,11 @@ function Perfil() {
         const token = localStorage.getItem("makeup-token");
 
         if (!token) {
-          throw new Error("Sua sessão expirou. Entre novamente.");
+          localStorage.removeItem("makeup-user");
+          localStorage.removeItem("makeup-token");
+
+          navigate("/login", { replace: true });
+          return;
         }
 
         const response = await fetch(
@@ -66,7 +75,7 @@ function Perfil() {
           localStorage.removeItem("makeup-user");
           localStorage.removeItem("makeup-token");
 
-          navigate("/login");
+          navigate("/login", { replace: true });
           return;
         }
 
@@ -76,27 +85,37 @@ function Perfil() {
           );
         }
 
-        setPedidos(data);
+        if (ativo) {
+          setPedidos(Array.isArray(data) ? data : []);
+        }
       } catch (error) {
         console.error("Erro ao carregar pedidos:", error);
 
-        setErroPedidos(
-          error.message ||
-            "Não foi possível carregar seus pedidos. Tente novamente."
-        );
+        if (ativo) {
+          setErroPedidos(
+            error.message ||
+              "Não foi possível carregar seus pedidos. Tente novamente."
+          );
+        }
       } finally {
-        setCarregandoPedidos(false);
+        if (ativo) {
+          setCarregandoPedidos(false);
+        }
       }
     }
 
     carregarPedidos();
+
+    return () => {
+      ativo = false;
+    };
   }, [usuario, navigate]);
 
   function handleLogout() {
     localStorage.removeItem("makeup-user");
     localStorage.removeItem("makeup-token");
 
-    navigate("/login");
+    navigate("/login", { replace: true });
   }
 
   if (!usuario) {
@@ -115,7 +134,7 @@ function Perfil() {
       <div className="profile-card">
         <div className="profile-card__header">
           <div className="profile-avatar">
-            {usuario.nome.charAt(0).toUpperCase()}
+            {usuario.nome?.charAt(0).toUpperCase()}
           </div>
 
           <div>
@@ -216,21 +235,21 @@ function Perfil() {
                       <span>Data</span>
                       <strong>
                         {pedido.data
-                          ? new Date(pedido.data).toLocaleDateString(
-                              "pt-BR"
-                            )
+                          ? new Date(
+                              pedido.data
+                            ).toLocaleDateString("pt-BR")
                           : "Data não disponível"}
                       </strong>
                     </div>
                   </div>
 
                   <div className="profile-order__items">
-                    {pedido.itens.map((item) => (
+                    {(pedido.itens || []).map((item) => (
                       <div
                         key={item.id}
                         className="profile-order__item"
                       >
-                        {item.produto.imagem && (
+                        {item.produto?.imagem && (
                           <img
                             src={item.produto.imagem}
                             alt={item.produto.nome}
@@ -238,8 +257,10 @@ function Perfil() {
                         )}
 
                         <div>
-                          <span>{item.produto.categoria}</span>
-                          <h3>{item.produto.nome}</h3>
+                          <span>
+                            {item.produto?.categoria}
+                          </span>
+                          <h3>{item.produto?.nome}</h3>
                           <p>Quantidade: {item.quantidade}</p>
                         </div>
 

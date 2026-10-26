@@ -1,10 +1,5 @@
-import {
-  createContext,
-  useContext,
-  useState,
-} from "react";
-
-const FavoritesContext = createContext();
+import { useState } from "react";
+import { FavoritesContext } from "./FavoritesContextValue";
 
 function FavoritesProvider({ children }) {
   const [favoriteItems, setFavoriteItems] = useState(() => {
@@ -69,11 +64,5 @@ function FavoritesProvider({ children }) {
   );
 }
 
-function useFavorites() {
-  return useContext(FavoritesContext);
-}
 
-export {
-  FavoritesProvider,
-  useFavorites,
-};
+export { FavoritesProvider };

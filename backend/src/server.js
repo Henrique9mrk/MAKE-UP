@@ -3,6 +3,7 @@ require("dotenv").config();
 
 const express = require("express");
 const cors = require("cors");
+const helmet = require("helmet");
 
 const prisma = require("./lib/prisma");
 const usuariosRoutes = require("./routes/usuarios");
@@ -64,6 +65,7 @@ function validarConfiguracao() {
 // ==================================================
 
 app.disable("x-powered-by");
+app.use(helmet());
 
 app.use(
   cors({

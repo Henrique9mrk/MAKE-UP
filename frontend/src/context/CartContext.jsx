@@ -1,9 +1,8 @@
-  import { createContext, useContext, useState } from "react";
+import { useState } from "react";
+import { CartContext } from "./CartContextValue";
 
-  const CartContext = createContext();
-
-  function CartProvider({ children }) {
-    const [cartItems, setCartItems] = useState([]);
+function CartProvider({ children }) {
+  const [cartItems, setCartItems] = useState([]);
 
     function addToCart(product) {
       setCartItems((currentItems) => {
@@ -102,11 +101,4 @@
     );
   }
 
-  function useCart() {
-    return useContext(CartContext);
-  }
-
-  export {
-    CartProvider,
-    useCart,
-  };
+export { CartProvider };

@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
 import { formatCurrency } from "../utils/formatCurrency";
-import { useFavorites } from "../context/FavoritesContext";
+import { useFavorites } from "../context/useFavorites";
 
 function ProductCard({ product }) {
   const {

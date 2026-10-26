@@ -6,7 +6,7 @@ import {
   FaShoppingBag,
 } from "react-icons/fa";
 
-import { useCart } from "../context/CartContext";
+import { useCart } from "../context/useCart";
 
 function Navbar() {
   const { totalItems } = useCart();
