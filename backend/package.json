@@ -5,8 +5,7 @@
   "main": "src/server.js",
   "scripts": {
     "start": "node src/server.js",
-    "test": "node --test tests/*.test.js",
-    "postinstall": "prisma skills sync || exit 0"
+    "test": "node --test tests/*.test.js"
   },
   "keywords": [],
   "author": "",
