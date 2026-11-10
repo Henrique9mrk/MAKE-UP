@@ -31,3 +31,4 @@ backend/.agents/
 backend/.claude/
 backend/.cursor/
 backend/.devin/
+.neon
