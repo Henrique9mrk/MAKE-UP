@@ -91,18 +91,20 @@ app.get("/", (req, res) => {
 // TESTE DE CONEXÃO COM O BANCO
 // ==================================================
 
-// Em produção, restrinja ou remova esta rota de diagnóstico.
-app.get("/api/teste", async (req, res, next) => {
-  try {
-    await prisma.$queryRaw`SELECT 1`;
+// Rota de diagnóstico disponível somente em desenvolvimento.
+if (process.env.NODE_ENV !== "production") {
+  app.get("/api/teste", async (req, res, next) => {
+    try {
+      await prisma.$queryRaw`SELECT 1`;
 
-    return res.status(200).json({
-      mensagem: "Backend conectado ao banco com sucesso!",
-    });
-  } catch (error) {
-    return next(error);
-  }
-});
+      return res.status(200).json({
+        mensagem: "Backend conectado ao banco com sucesso!",
+      });
+    } catch (error) {
+      return next(error);
+    }
+  });
+}
 
 // ==================================================
 // ROTAS DA API
