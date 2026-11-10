@@ -1,6 +1,7 @@
 import "../styles/categorias.css";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { apiUrl } from "../services/api";
 
 function Categorias() {
   const [categorias, setCategorias] = useState([]);
@@ -12,7 +13,7 @@ function Categorias() {
 
     async function carregarCategorias() {
       try {
-        const resposta = await fetch("http://localhost:3000/api/produtos");
+        const resposta = await fetch(apiUrl("/api/produtos"));
 
         if (!resposta.ok) {
           throw new Error("Não foi possível carregar os produtos.");

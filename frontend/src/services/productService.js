@@ -1,5 +1,5 @@
-const API_URL = "http://localhost:3000/api/produtos";
-
+import { apiUrl } from "./api";
+const API_URL = apiUrl("/api/produtos");
 /**
  * Busca todos os produtos cadastrados no backend.
  */

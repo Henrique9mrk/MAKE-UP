@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import PageSection from "../components/PageSection";
+import { apiUrl } from "../services/api";
 import { formatCurrency } from "../utils/formatCurrency";
 
 function Perfil() {
@@ -61,13 +62,13 @@ function Perfil() {
         }
 
         const response = await fetch(
-          `http://localhost:3000/api/pedidos/usuario/${usuario.id}`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+  apiUrl(`/api/pedidos/usuario/${usuario.id}`),
+  {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }
+);
 
         const data = await response.json();
 

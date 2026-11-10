@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import PageSection from "../components/PageSection";
+import { apiUrl } from "../services/api";
 
 function Cadastro() {
 const navigate = useNavigate();
@@ -42,7 +43,7 @@ setCarregando(true);
 
 try {
   const response = await fetch(
-    "http://localhost:3000/api/usuarios",
+   apiUrl("/api/usuarios"),
     {
       method: "POST",
       headers: {

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import PageSection from "../components/PageSection";
+import { apiUrl } from "../services/api";
 
 function Login() {
 const navigate = useNavigate();
@@ -33,19 +34,19 @@ setErro("");
 setCarregando(true);
 
 try {
-  const response = await fetch(
-    "http://localhost:3000/api/usuarios/login",
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: form.email,
-        senha: form.password,
-      }),
-    }
-  );
+ const response = await fetch(
+  apiUrl("/api/usuarios/login"),
+  {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      email: form.email,
+      senha: form.password,
+    }),
+  }
+);
 
   const data = await response.json();
 

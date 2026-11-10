@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 
 import PageSection from "../components/PageSection";
+import { apiUrl } from "../services/api";
 import { useCart } from "../context/useCart";
 import { formatCurrency } from "../utils/formatCurrency";
 
@@ -59,7 +60,7 @@ function Checkout() {
       }));
 
       const response = await fetch(
-        "http://localhost:3000/api/pedidos",
+        apiUrl("/api/pedidos"),
         {
           method: "POST",
           headers: {

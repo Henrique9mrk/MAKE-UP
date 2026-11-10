@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import PageSection from "../components/PageSection";
+import { apiUrl } from "../services/api";
 import { formatCurrency } from "../utils/formatCurrency";
 import { useCart } from "../context/useCart";
 
@@ -22,9 +23,9 @@ function Produto() {
         setError("");
         setProduct(null);
 
-        const response = await fetch(
-          `http://localhost:3000/api/produtos/${id}`
-        );
+      const response = await fetch(
+  apiUrl(`/api/produtos/${id}`)
+);
 
         const data = await response.json();
 
