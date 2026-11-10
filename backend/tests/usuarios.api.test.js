@@ -191,6 +191,24 @@ test("login rejeita senha incorreta", async () => {
   assert.equal(resposta.status, 401);
 });
 
+test("login rejeita email acima de 254 caracteres", async () => {
+  const resposta = await requisitar("/api/usuarios/login", {
+    email: `${"a".repeat(243)}@exemplo.com`,
+    senha: "senha-segura-123",
+  });
+
+  assert.equal(resposta.status, 400);
+});
+
+test("login rejeita senha acima de 72 bytes", async () => {
+  const resposta = await requisitar("/api/usuarios/login", {
+    email: "teste-cadastro@exemplo.com",
+    senha: "a".repeat(73),
+  });
+
+  assert.equal(resposta.status, 400);
+});
+
 test("login rejeita email inexistente", async () => {
   const resposta = await requisitar("/api/usuarios/login", {
     email: "nao-existe@exemplo.com",

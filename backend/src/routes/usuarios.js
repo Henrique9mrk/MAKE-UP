@@ -39,12 +39,13 @@ router.post("/", limiteCadastro, async (req, res) => {
     const { nome, email, senha } = req.body || {};
 
     if (
-      typeof nome !== "string" ||
       typeof email !== "string" ||
-      typeof senha !== "string"
+      typeof senha !== "string" ||
+      !email.trim() ||
+      !senha
     ) {
       return res.status(400).json({
-        mensagem: "Nome, email e senha são obrigatórios.",
+        mensagem: "Email ou senha inválidos.",
       });
     }
 
@@ -145,6 +146,15 @@ router.post("/login", limiteLogin, async (req, res) => {
     ) {
       return res.status(400).json({
         mensagem: "Email e senha são obrigatórios.",
+      });
+    }
+
+    if (
+      email.trim().length > 254 ||
+      Buffer.byteLength(senha, "utf8") > 72
+    ) {
+      return res.status(400).json({
+        mensagem: "Email ou senha inválidos.",
       });
     }
 
