@@ -60,3 +60,26 @@ test("GET /api/produtos/:id deve retornar 404 para produto inexistente", async (
 
   assert.equal(dados.mensagem, "Produto não encontrado.");
 });
+
+const idsInvalidos = [
+  "1.5",
+  "1e2",
+  "%201%20",
+  "0",
+  "-1",
+  "9007199254740992",
+];
+
+for (const id of idsInvalidos) {
+  test(`GET /api/produtos/${id} deve rejeitar ID inválido`, async () => {
+    const resposta = await fetch(
+      `${await baseURL}/api/produtos/${id}`
+    );
+
+    assert.equal(resposta.status, 400);
+
+    const dados = await resposta.json();
+
+    assert.equal(dados.mensagem, "ID do produto inválido.");
+  });
+}

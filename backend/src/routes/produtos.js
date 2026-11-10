@@ -37,10 +37,19 @@ router.get("/", async (req, res) => {
 // Consultar um produto pelo ID.
 router.get("/:id", async (req, res) => {
   try {
-    const id = Number(req.params.id);
+    const idTexto = req.params.id;
 
-    // O ID precisa ser um número inteiro positivo.
-    if (!Number.isSafeInteger(id) || id <= 0) {
+    // Aceitar somente números inteiros positivos.
+    if (!/^[1-9]\d*$/.test(idTexto)) {
+      return res.status(400).json({
+        mensagem: "ID do produto inválido.",
+      });
+    }
+
+    const id = Number(idTexto);
+
+    // Verificar se o número é um inteiro seguro.
+    if (!Number.isSafeInteger(id)) {
       return res.status(400).json({
         mensagem: "ID do produto inválido.",
       });
