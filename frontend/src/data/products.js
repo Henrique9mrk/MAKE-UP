@@ -1,34 +1,39 @@
+
 export const products = [
   {
     id: 1,
     name: "Base Líquida Velvet",
     category: "Base",
-    price: 129.9,
-    description: "Cobertura delicada e acabamento aveludado para um look natural.",
-    image: "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=800&q=80",
+    price: 129.90,
+    description:
+      "Cobertura delicada e acabamento aveludado para um look natural.",
+    image: "/images/base-velvet.jpg",
   },
   {
     id: 2,
     name: "Blush em Creme",
     category: "Blush",
-    price: 89.0,
-    description: "Cor vibrante e textura leve para um resultado saudável e fresco.",
-    image: "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&fit=crop&w=800&q=80",
+    price: 89.00,
+    description:
+      "Cor vibrante e textura leve para um resultado saudável e fresco.",
+    image: "/images/blush-creme.jpg",
   },
   {
     id: 3,
     name: "Máscara de Cílios Volume",
     category: "Olhos",
-    price: 74.5,
-    description: "Fórmula que alonga e dá volume sem pesar os fios.",
-    image: "https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=800&q=80",
+    price: 74.50,
+    description:
+      "Fórmula que alonga e dá volume sem pesar os fios.",
+    image: "/images/mascara-cilios.jpg",
   },
   {
     id: 4,
     name: "Batom Matte Intenso",
     category: "Boca",
-    price: 69.9,
-    description: "Cor intensa e longa duração com acabamento sofisticado.",
-    image: "https://images.unsplash.com/photo-1585386959984-a4155224a1ad?auto=format&fit=crop&w=800&q=80",
+    price: 69.90,
+    description:
+      "Cor intensa e longa duração com acabamento sofisticado.",
+    image: "/images/batom-matte.jpg",
   },
 ];
