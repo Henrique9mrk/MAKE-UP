@@ -1,118 +1,264 @@
-# MAKE-UP — Sistema de Maquiagem
+# MAKE-UP — Sistema Web de Maquiagem
 
 ## Sobre o projeto
 
-O MAKE-UP é uma aplicação web de maquiagem que permite visualizar produtos, gerenciar favoritos e carrinho, realizar pedidos e consultar o histórico de compras.
+O **MAKE-UP** é uma aplicação web desenvolvida para oferecer uma experiência prática e organizada de compra de produtos de maquiagem.
 
-## Tecnologias
+O sistema permite visualizar produtos, explorar categorias, gerenciar favoritos e carrinho, realizar pedidos e consultar o histórico de compras.
 
-- **Frontend:** React, Vite, JavaScript e CSS.
-- **Backend:** Node.js, Express e Prisma ORM.
-- **Banco de dados:** PostgreSQL.
-- **Autenticação:** JWT e bcrypt.
+O projeto utiliza uma arquitetura separada entre frontend e backend, com persistência de dados em PostgreSQL.
 
-## Estrutura
+## Acesso ao sistema
 
-- `frontend/` — interface web.
-- `backend/` — API, autenticação e pedidos.
-- `backend/prisma/` — schema e migrações do banco.
-- `backend/tests/` — testes automatizados do backend.
-- `docs/` — documentação complementar.
-- `assets/` — recursos do projeto.
+- **Site:** https://make-up-349y.onrender.com
+- **API:** https://make-up-backendmake-up.onrender.com
+- **Repositório:** https://github.com/Henrique9mrk/MAKE-UP
+
+## Funcionalidades
+
+- Visualização do catálogo de produtos.
+- Navegação por categorias.
+- Pesquisa de produtos.
+- Cadastro e login de usuários.
+- Autenticação.
+- Gerenciamento de perfil.
+- Gerenciamento de favoritos.
+- Carrinho de compras.
+- Finalização de pedidos.
+- Histórico de compras.
+
+## Tecnologias utilizadas
+
+### Frontend
+- React 19.
+- Vite.
+- JavaScript.
+- CSS.
+- Axios.
+- React Router.
+- React Icons.
+
+### Backend
+- Node.js.
+- Express 5.
+- Prisma ORM 6.
+- JWT.
+- bcrypt.
+- Helmet.
+- Express Rate Limit.
+
+### Banco de dados
+- PostgreSQL.
+- Neon (produção).
+
+### Hospedagem
+- Render (frontend e backend).
+- Neon (banco de dados).
+
+## Estrutura do projeto
+
+```text
+MAKE-UP/
+├── assets/
+├── backend/
+│   ├── prisma/
+│   │   ├── migrations/
+│   │   ├── schema.prisma
+│   │   └── seed.js
+│   ├── src/
+│   │   ├── lib/
+│   │   ├── middleware/
+│   │   ├── routes/
+│   │   ├── utils/
+│   │   └── server.js
+│   ├── tests/
+│   ├── .env.example
+│   └── package.json
+├── docs/
+├── frontend/
+│   ├── src/
+│   │   ├── components/
+│   │   ├── pages/
+│   │   ├── services/
+│   │   ├── styles/
+│   │   └── utils/
+│   └── package.json
+├── .gitignore
+└── README.md
+```
 
 ## Pré-requisitos
 
-Instale Node.js, npm, Git e PostgreSQL.
+Para executar o projeto localmente, é necessário ter:
 
-## 1. Obter o projeto
+- Node.js e npm.
+- Git.
+- PostgreSQL.
 
-Clone o repositório:
+## Instalação e configuração
+
+### 1. Clonar o repositório
 
 ```bash
 git clone https://github.com/Henrique9mrk/MAKE-UP.git
 cd MAKE-UP
 ```
 
-## 2. Configurar o banco de dados
+### 2. Configurar o banco de dados
 
-Crie um banco PostgreSQL chamado `maquiagem` ou escolha outro nome e use-o na variável `DATABASE_URL`.
+Crie um banco de dados PostgreSQL chamado `maquiagem`.
 
-Configure as credenciais do PostgreSQL para o seu próprio ambiente.
+Caso utilize outro nome, atualize a variável `DATABASE_URL` de acordo com sua configuração.
 
-## 3. Configurar o backend
+### 3. Configurar o backend
 
 Entre na pasta do backend:
 
 ```bash
 cd backend
+```
+
+Instale as dependências:
+
+```bash
 npm install
 ```
 
-Crie o arquivo `.env` a partir do modelo:
+Crie o arquivo de variáveis de ambiente:
 
 ```bash
 cp .env.example .env
 ```
 
-Edite `backend/.env` e substitua os valores de exemplo:
-- `DATABASE_URL`: endereço de conexão do PostgreSQL.
-- `JWT_SECRET`: segredo aleatório e exclusivo para o ambiente.
+Edite `backend/.env` e configure:
 
-As variáveis `PORT` e `FRONTEND_URL` podem manter os valores padrão para desenvolvimento local.
+| Variável | Descrição |
+|---|---|
+| `DATABASE_URL` | Endereço de conexão com PostgreSQL |
+| `JWT_SECRET` | Segredo exclusivo para assinatura dos tokens |
+| `PORT` | Porta do backend (padrão: 3000) |
+| `FRONTEND_URL` | Endereço do frontend (padrão: http://localhost:5173) |
 
-Gere o cliente Prisma e execute as migrações:
+Gere o Prisma Client:
 
 ```bash
 npx prisma generate
+```
+
+Execute as migrações:
+
+```bash
 npx prisma migrate deploy
 ```
 
-Se for necessário preencher o banco com os dados iniciais, consulte as instruções do arquivo `backend/prisma/seed.js` antes de executar qualquer seed.
-
-Inicie a API:
+Inicie o backend:
 
 ```bash
 npm start
 ```
 
-O backend utiliza a porta `3000` por padrão.
+A API estará disponível em:
 
-## 4. Configurar o frontend
+```text
+http://localhost:3000
+```
 
-Abra outro terminal na raiz do projeto e execute:
+### 4. Configurar o frontend
+
+Abra outro terminal na raiz do projeto e entre na pasta do frontend:
 
 ```bash
 cd frontend
+```
+
+Instale as dependências:
+
+```bash
 npm install
+```
+
+Inicie o servidor de desenvolvimento:
+
+```bash
 npm run dev
 ```
 
-O Vite exibirá o endereço local do frontend, normalmente `http://localhost:5173`.
+O frontend estará disponível normalmente em:
 
-## 5. Testes e validação
+```text
+http://localhost:5173
+```
 
-Para executar os testes automatizados do backend:
+O endereço padrão da API em desenvolvimento é `http://localhost:3000`.
+
+Para configurar outro endereço, utilize a variável `VITE_API_URL` em um arquivo de ambiente do frontend, como `.env.local`.
+
+## Testes e validação
+
+### Testes automatizados do backend
+
+Na pasta `backend`, execute:
 
 ```bash
-cd backend
 npm test
 ```
 
-Para verificar o frontend:
+### Verificação do frontend
+
+Na pasta `frontend`, execute:
 
 ```bash
-cd frontend
 npm run lint
+```
+
+Para gerar a versão de produção:
+
+```bash
 npm run build
+```
+
+Para visualizar a versão compilada:
+
+```bash
+npm run preview
 ```
 
 ## Segurança
 
-- Nunca publique o arquivo `backend/.env`.
-- Não compartilhe senhas, tokens JWT ou credenciais do banco.
-- Use um `JWT_SECRET` exclusivo e forte em cada ambiente.
-- O arquivo `backend/.env.example` contém apenas valores de exemplo.
+O projeto possui mecanismos de segurança, incluindo:
 
-## Status
+- Autenticação por JWT.
+- Senhas armazenadas com hash bcrypt.
+- Validação dos dados recebidos pela API.
+- Proteção de rotas que exigem autenticação.
+- Controle de acesso aos pedidos dos usuários.
+- Limitação de tentativas de login.
+- Helmet para proteção de cabeçalhos HTTP.
+- Restrição de origem das requisições por CORS.
+- Tratamento centralizado de erros.
+- Proteção de arquivos de ambiente pelo `.gitignore`.
 
-Projeto em desenvolvimento. Antes de considerar a entrega concluída, valide a instalação em outro computador, o funcionamento do banco, o cadastro, o login, o carrinho, a finalização de pedidos e o histórico de compras.
+**Importante:** nunca publique arquivos `.env`, senhas, tokens JWT ou credenciais do banco de dados no GitHub.
+
+O arquivo `backend/.env.example` contém somente valores de exemplo.
+
+## Ambiente de produção
+
+O sistema está publicado utilizando:
+
+- Frontend e backend hospedados no Render.
+- Banco de dados PostgreSQL hospedado no Neon.
+
+Em produção, o frontend utiliza a variável `VITE_API_URL` para se comunicar com o backend.
+
+As credenciais e configurações de produção são mantidas nas variáveis de ambiente dos serviços de hospedagem.
+
+## Status do projeto
+
+O MAKE-UP possui frontend e backend publicados em produção, banco de dados conectado e funcionalidades principais validadas.
+
+O projeto conta com testes automatizados para validação das funcionalidades e regras de segurança do backend.
+
+## Autor
+
+Projeto acadêmico desenvolvido como sistema web de maquiagem.
